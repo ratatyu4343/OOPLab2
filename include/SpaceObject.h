@@ -2,7 +2,7 @@
 #define SPACEOBJECT_H
 #include <Vector.h>
 
-class SpaceObject
+class SpaceObjectType
 {
     public:
         SpaceObject();
@@ -15,13 +15,14 @@ class SpaceObject
         void set_position(Vector);
         void set_acceleration(Vector);
         void set_mass(float);
-        void get_radius(float);
+        void set_radius(float);
     private:
         float mass;
         float radius;
         Vector position;
         Vector speed;
         Vector acceleration;
+
 };
 
 #endif // SPACEOBJECT_H

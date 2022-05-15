@@ -1,56 +1,56 @@
 #include "SpaceObject.h"
 
-SpaceObject::SpaceObject()
+SpaceObjectType::SpaceObject()
 {
 
 }
 
-Vector SpaceObject::get_speed()
+Vector SpaceObjectType::get_speed()
 {
     return speed;
 }
 
-Vector SpaceObject::get_position()
+Vector SpaceObjectType::get_position()
 {
     return position;
 }
 
-Vector SpaceObject::get_acceleration()
+Vector SpaceObjectType::get_acceleration()
 {
     return acceleration;
 }
 
-float SpaceObject::get_mass()
+float SpaceObjectType::get_mass()
 {
     return mass;
 }
 
-float SpaceObject::get_radius()
+float SpaceObjectType::get_radius()
 {
     return radius;
 }
 
-void SpaceObject::set_speed(Vector v)
+void SpaceObjectType::set_speed(Vector v)
 {
     speed = v;
 }
 
-void SpaceObject::set_position(Vector v)
+void SpaceObjectType::set_position(Vector v)
 {
     position = v;
 }
 
-void SpaceObject::set_acceleration(Vector v)
+void SpaceObjectType::set_acceleration(Vector v)
 {
     acceleration = v;
 }
 
-void SpaceObject::set_mass(float m)
+void SpaceObjectType::set_mass(float m)
 {
     mass = m;
 }
 
-void SpaceObject::set_mass(float r)
+void SpaceObjectType::set_radius(float r)
 {
     radius = r;
 }
