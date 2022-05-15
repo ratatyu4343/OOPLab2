@@ -3,17 +3,18 @@
 #include <Vector.h>
 #include <RGB.h>
 #include <vector>
+#include <string>
 
 class SpaceObjectType
 {
     public:
-        SpaceObjectType(float, float, string, int, int, int);
+        SpaceObjectType(float, float, std::string, RGB);
         float get_mass();
         float get_radius();
-        string get_type_name();
+        std::string get_type_name();
         RGB get_rgb();
     private:
-        string type_name;
+        std::string type_name;
         float mass;
         float radius;
         RGB color;
@@ -22,15 +23,15 @@ class SpaceObjectType
 class SpaceObjectFactory
 {
 public:
-    SpaceObjectType* get_type(string , float, float, RGB);
+    static SpaceObjectType* get_type(std::string , float, float, RGB);
 private:
-    std::vector<SpaceObjectType*> typeCollection;
+    static std::vector<SpaceObjectType*> typeCollection;
 };
 
 class SpaceObject
 {
 public:
-    SpaceObject();
+    SpaceObject(std::string, float, float, RGB);
     void set_speed(Vector);
     void set_position(Vector);
     void set_acceleration(Vector);

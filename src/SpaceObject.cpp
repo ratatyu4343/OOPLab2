@@ -1,13 +1,15 @@
 #include "SpaceObject.h"
 
-SpaceObjectType::SpaceObjectType(float r, float m, string name, int r, int g, int b)
+std::vector<SpaceObjectType*> SpaceObjectFactory::typeCollection;
+
+SpaceObjectType::SpaceObjectType(float r, float m, std::string name, RGB rgb)
 {
     type_name = name;
     mass = m;
     radius = r;
-    color.set_R(r);
-    color.set_G(g);
-    color.set_B(b);
+    color.set_R(rgb.get_R());
+    color.set_G(rgb.get_G());
+    color.set_B(rgb.get_B());
 }
 
 float SpaceObjectType::get_mass()
@@ -20,7 +22,7 @@ float SpaceObjectType::get_radius()
     return radius;
 }
 
-string SpaceObjectType::get_type_name()
+std::string SpaceObjectType::get_type_name()
 {
     return type_name;
 }
@@ -30,7 +32,7 @@ RGB SpaceObjectType::get_rgb()
     return color;
 }
 
-SpaceObjectType* SpaceObjectFactory::get_type(string type_name, float mass, float radius, RGB rgb)
+SpaceObjectType* SpaceObjectFactory::get_type(std::string type_name, float mass, float radius, RGB rgb)
 {
     int count_of_types = typeCollection.size();
     for(int i = 0; i < count_of_types; i++)
@@ -49,37 +51,37 @@ SpaceObjectType* SpaceObjectFactory::get_type(string type_name, float mass, floa
     return new_type;
 }
 
-SpaceObject::SpaceObject()
+SpaceObject::SpaceObject(std::string s, float m, float r, RGB rgb)
 {
-
+    type = SpaceObjectFactory::get_type(s, m, r, rgb);
 }
 
-Vector SpaceObjectType::get_speed()
+Vector SpaceObject::get_speed()
 {
     return speed;
 }
 
-Vector SpaceObjectType::get_position()
+Vector SpaceObject::get_position()
 {
     return position;
 }
 
-Vector SpaceObjectType::get_acceleration()
+Vector SpaceObject::get_acceleration()
 {
     return acceleration;
 }
 
-void SpaceObjectType::set_speed(Vector v)
+void SpaceObject::set_speed(Vector v)
 {
     speed = v;
 }
 
-void SpaceObjectType::set_position(Vector v)
+void SpaceObject::set_position(Vector v)
 {
     position = v;
 }
 
-void SpaceObjectType::set_acceleration(Vector v)
+void SpaceObject::set_acceleration(Vector v)
 {
     acceleration = v;
 }

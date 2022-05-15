@@ -1,6 +1,6 @@
 #include <iostream>
-#include <TColor.h>
 #include <Vector.h>
+#include <SpaceObject.h>
 
 using namespace std;
 
