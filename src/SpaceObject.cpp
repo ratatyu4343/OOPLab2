@@ -85,3 +85,43 @@ void SpaceObject::set_acceleration(Vector v)
 {
     acceleration = v;
 }
+
+void SpaceObject::set_mass(float m)
+{
+    type = SpaceObjectFactory::get_type(get_type_name(), m, get_radius(), get_rgb());
+}
+
+void SpaceObject::set_radius(float r)
+{
+    type = SpaceObjectFactory::get_type(get_type_name(), get_mass(), r, get_rgb());
+}
+
+void SpaceObject::set_color(RGB rgb)
+{
+    type = SpaceObjectFactory::get_type(get_type_name(), get_mass(), get_radius(), rgb);
+}
+
+void SpaceObject::set_type_name(std::string name)
+{
+    type = SpaceObjectFactory::get_type(name, get_mass(), get_radius(), get_rgb());
+}
+
+float SpaceObject::get_mass()
+{
+    return type->get_mass();
+}
+
+float SpaceObject::get_radius()
+{
+    return type->get_radius();
+}
+
+std::string SpaceObject::get_type_name()
+{
+    return type->get_type_name();
+}
+
+RGB SpaceObject::get_rgb()
+{
+    return type->get_rgb();
+}

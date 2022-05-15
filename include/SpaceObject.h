@@ -35,9 +35,17 @@ public:
     void set_speed(Vector);
     void set_position(Vector);
     void set_acceleration(Vector);
+    void set_mass(float);
+    void set_radius(float);
+    void set_color(RGB);
+    void set_type_name(std::string);
     Vector get_speed();
     Vector get_position();
     Vector get_acceleration();
+    float get_mass();
+    float get_radius();
+    std::string get_type_name();
+    RGB get_rgb();
 private:
     SpaceObjectType* type;
     Vector position;
