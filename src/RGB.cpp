@@ -9,9 +9,9 @@ RGB::RGB()
 
 RGB::RGB(int r, int g, int b)
 {
-    R = r;
-    G = g;
-    B = b;
+    set_R(r);
+    set_G(g);
+    set_B(b);
 }
 
 int RGB::get_R()
@@ -25,4 +25,27 @@ int RGB::get_G()
 int RGB::get_B()
 {
    return B;
+}
+
+void RGB::set_R(int c)
+{
+    R = c;
+}
+
+void RGB::set_G(int c)
+{
+    G = c;
+}
+
+void RGB::set_B(int c)
+{
+    B = c;
+}
+
+bool RGB::operator==(RGB rgb2)
+{
+    if(rgb2.get_B() == B && rgb2.get_G() == G && rgb2.get_R() == R)
+        return true;
+    else
+        return false;
 }
