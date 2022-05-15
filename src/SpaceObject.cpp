@@ -25,6 +25,11 @@ float SpaceObject::get_mass()
     return mass;
 }
 
+float SpaceObject::get_radius()
+{
+    return radius;
+}
+
 void SpaceObject::set_speed(Vector v)
 {
     speed = v;
@@ -42,6 +47,10 @@ void SpaceObject::set_acceleration(Vector v)
 
 void SpaceObject::set_mass(float m)
 {
-    mass = m
+    mass = m;
 }
 
+void SpaceObject::set_mass(float r)
+{
+    radius = r;
+}

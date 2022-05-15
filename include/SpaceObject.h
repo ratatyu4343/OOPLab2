@@ -10,16 +10,18 @@ class SpaceObject
         Vector get_position();
         Vector get_acceleration();
         float get_mass();
+        float get_radius();
         void set_speed(Vector);
         void set_position(Vector);
         void set_acceleration(Vector);
         void set_mass(float);
+        void get_radius(float);
     private:
         float mass;
+        float radius;
         Vector position;
         Vector speed;
         Vector acceleration;
-
 };
 
 #endif // SPACEOBJECT_H
