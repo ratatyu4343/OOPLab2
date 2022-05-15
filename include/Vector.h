@@ -5,6 +5,7 @@
 class Vector
 {
     public:
+        Vector();
         Vector(float, float);
         float x();
         float y();

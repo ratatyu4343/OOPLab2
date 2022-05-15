@@ -1,6 +1,12 @@
 #include "Vector.h"
 
-Vector::Vector(float x = 0, float y = 0)
+Vector::Vector()
+{
+    set_x(0);
+    set_y(0);
+}
+
+Vector::Vector(float x, float y)
 {
     set_x(x);
     set_y(y);
