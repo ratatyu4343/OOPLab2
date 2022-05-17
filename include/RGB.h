@@ -2,7 +2,7 @@
 #define RGB_H
 
 
-class RGB
+struct RGB
 {
     public:
         RGB();

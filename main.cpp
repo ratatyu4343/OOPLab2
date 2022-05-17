@@ -6,8 +6,10 @@ using namespace std;
 
 int main()
 {
-    Vector* a = new Vector(12, 12);
-    Vector b(13, 4);
-    *a -= b;
-    cout << a->x() << " " << a->y() << "\n";
+    SpaceObject* obj1 = new Planet(100, 20, RGB(10, 10, 10));
+    obj1->set_speed(Vector(100, 220));
+    SpaceObject* obj2 = new Star(100, 20, RGB(10, 10, 10));
+    obj2->set_speed(Vector(-100, 0));
+    obj1->marge(obj2);
+    cout << obj1->get_speed().x() << " " << obj1->get_speed().y() << " " << obj1->get_mass()<< "\n";
 }

@@ -2,7 +2,7 @@
 #define VECTOR_H
 
 
-class Vector
+struct Vector
 {
     public:
         Vector();

@@ -8,13 +8,11 @@
 class SpaceObjectType
 {
     public:
-        SpaceObjectType(float, float, std::string, RGB);
+        SpaceObjectType(float, float, RGB);
         float get_mass();
         float get_radius();
-        std::string get_type_name();
         RGB get_rgb();
     private:
-        std::string type_name;
         float mass;
         float radius;
         RGB color;
@@ -23,7 +21,7 @@ class SpaceObjectType
 class SpaceObjectFactory
 {
 public:
-    static SpaceObjectType* get_type(std::string , float, float, RGB);
+    static SpaceObjectType* get_type(float, float, RGB);
 private:
     static std::vector<SpaceObjectType*> typeCollection;
 };
@@ -31,21 +29,20 @@ private:
 class SpaceObject
 {
 public:
-    SpaceObject(std::string, float, float, RGB);
+    SpaceObject(float, float, RGB);
     void set_speed(Vector);
     void set_position(Vector);
     void set_acceleration(Vector);
     void set_mass(float);
     void set_radius(float);
     void set_color(RGB);
-    void set_type_name(std::string);
     Vector get_speed();
     Vector get_position();
     Vector get_acceleration();
     float get_mass();
     float get_radius();
-    std::string get_type_name();
     RGB get_rgb();
+    virtual void marge(SpaceObject*) = 0;
 private:
     SpaceObjectType* type;
     Vector position;
@@ -53,4 +50,24 @@ private:
     Vector acceleration;
 };
 
+class Planet : public SpaceObject
+{
+public:
+    Planet(float, float, RGB);
+    void marge(SpaceObject*) override;
+};
+
+class BlackHole : public SpaceObject
+{
+public:
+    BlackHole(float, RGB);
+    void marge(SpaceObject*) override;
+};
+
+class Star : public SpaceObject
+{
+public:
+    Star(float, float, RGB);
+    void marge(SpaceObject*) override;
+};
 #endif // SPACEOBJECT_H

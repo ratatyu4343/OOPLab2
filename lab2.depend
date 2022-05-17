@@ -7,19 +7,26 @@
 1652615644 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\vector.cpp
 	"Vector.h"
 
-1652615653 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
+1652820635 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
 
 1652619912 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\rgb.cpp
 	"RGB.h"
 
-1652619801 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\rgb.h
+1652820647 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\rgb.h
 
-1652621616 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
+1652821100 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
 	<Vector.h>
 	<RGB.h>
 	<vector>
 	<string>
 
-1652621572 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
+1652820605 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
 	"SpaceObject.h"
+
+1652817409 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
+	"Space.h"
+
+1652817403 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
+	<vector>
+	<SpaceObject.h>
 
