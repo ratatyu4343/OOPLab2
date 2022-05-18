@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1652622045 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
+1652821335 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
 	<iostream>
 	<Vector.h>
 	<SpaceObject.h>
@@ -7,7 +7,8 @@
 1652615644 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\vector.cpp
 	"Vector.h"
 
-1652820635 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
+1652822301 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
+	<cmath>
 
 1652619912 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\rgb.cpp
 	"RGB.h"

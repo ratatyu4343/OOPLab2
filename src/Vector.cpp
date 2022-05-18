@@ -55,3 +55,9 @@ Vector Vector::operator -= (Vector v)
     add_y(-v.y());
     return *this;
 }
+
+float Vector::length(Vector v1, Vector v2)
+{
+    v1 -= v2;
+    return std::sqrt(v1.x()*v1.x() + v1.y()*v1.y());
+}

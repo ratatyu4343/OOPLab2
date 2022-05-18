@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-
+#include <cmath>
 
 struct Vector
 {
@@ -15,6 +15,7 @@ struct Vector
         void add_y(float);
         Vector operator += (Vector);
         Vector operator -= (Vector);
+        static float length(Vector, Vector);
     private:
         float coord_x;
         float coord_y;

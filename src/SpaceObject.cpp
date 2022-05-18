@@ -109,20 +109,37 @@ RGB SpaceObject::get_rgb()
     return type->get_rgb();
 }
 
-Planet::Planet(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
+float SpaceObject::get_m3(SpaceObject* obj)
 {
-
+    return this->get_mass() + obj->get_mass();
 }
 
-void Planet::marge(SpaceObject* obj)
+Vector SpaceObject::set_speed_by_impuls(SpaceObject* obj)
 {
-    float m3 = this->get_mass() + obj->get_mass();
+    float m3 = this->get_m3(obj);
     Vector v;
     v.set_x((this->get_speed().x()*this->get_mass() + obj->get_speed().x()*obj->get_mass())/m3);
     v.set_y((this->get_speed().y()*this->get_mass() + obj->get_speed().y()*obj->get_mass())/m3);
-    this->set_mass(m3);
+    return v;
+}
+
+void SpaceObject::set_radius_by_marge(SpaceObject* obj)
+{
     this->set_radius(this->get_radius() + obj->get_radius()/2);
+}
+
+void SpaceObject::marge(SpaceObject*)
+{
+    float m3 = this->get_m3(obj);
+    Vector v = this->get_speed_by_impuls(obj);
+    this->set_mass(m3);
     this->set_speed(v);
+    set_radius_by_marge(obj);
+}
+
+Planet::Planet(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
+{
+
 }
 
 BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(2362247, r, rgb)
@@ -130,9 +147,19 @@ BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(2362247, r, rgb)
 
 }
 
-void BlackHole::marge(SpaceObject* obj)
+float BlackHole::get_m3(SpaceObject*)
 {
-    this->set_radius(this->get_radius() + obj->get_radius()/2);
+    return this->get_mass();
+}
+
+float BlackHole::get_speed_by_impuls(SpaceObject*)
+{
+    return this->get_speed();
+}
+
+float BlackHole::set_radius_by_marge(SpaceObject*)
+{
+
 }
 
 Star::Star(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
@@ -140,11 +167,12 @@ Star::Star(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
 
 }
 
-void Star::marge(SpaceObject* obj)
+float Star::get_m3(SpaceObject*)
 {
-    float m3 = this->get_mass() + obj->get_mass();
-    Vector v;
-    v.set_x((this->get_speed().x()*this->get_mass() + obj->get_speed().x()*obj->get_mass())/m3);
-    v.set_y((this->get_speed().y()*this->get_mass() + obj->get_speed().y()*obj->get_mass())/m3);
-    this->set_speed(v);
+     return this->get_mass();
+}
+
+void Star::set_radius_by_marge(SpaceObject*)
+{
+
 }
