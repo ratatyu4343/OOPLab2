@@ -14,6 +14,16 @@ float Space::force(SpaceObject* obj1, SpaceObject* obj2)
     return (G_CONST*obj1->get_mass()*obj2->get_mass())/(leng*leng);
 }
 
+void Space::set_gconst(float g)
+{
+    G_CONST = g;
+}
+
+float Space::get_gconst()
+{
+    return G_CONST;
+}
+
 bool Space::colision(SpaceObject* obj1, SpaceObject* obj2)
 {
     float leng = Vector::length(obj1->get_position(), obj2->get_position());
@@ -25,52 +35,45 @@ bool Space::colision(SpaceObject* obj1, SpaceObject* obj2)
 
 void Space::modeling()
 {
+    auto it1 = objects.begin();
+    while(it1 != objects.end())
+    {
+        SpaceObject* obj1 = *it1;
+        auto it2 = objects.begin();
+        while(it2 != objects.end())
+        {
+            if(it1 == it2) continue;
 
+            SpaceObject* obj2 = *it2;
+            if(this->colision(obj1, obj2))
+            {
+                if(obj1->get_mass() >= obj2->get_mass())
+                {
+                    obj1->marge(obj2);
+                }
+                it2 = objects.erase(it2);
+            }
+            else
+            {
+
+            }
+        }
+    }
 }
 
 void Space::clickModeling()
 {
-    state.clickModeling();
+    state->clickModeling();
 }
 
 void Space::clickPause()
 {
-    state.clickPause();
+    state->clickPause();
 }
 
 void Space::changeState(State* new_state)
 {
     delete state;
     state = new_state;
-}
-
-State::State(Space* s)
-{
-    space = s;
-}
-
-ModelingState::ModelingState(Space* s) : State(s)
-{
-    space->modeling();
-    space->changeState(new PauseState(space));
-}
-
-void ModelingState::clickPause()
-{
-    space->set_stoped(true);
-    space->changeState(new PauseState(space));
-}
-
-PauseState::PauseState(Space* s) : State(s)
-{
-    if(!space->is_stoped())
-    {
-        space->changeState(new ModelingState(space));
-    }
-}
-
-void PauseState::clickPause()
-{
-    space->set_stoped(true);
 }
 

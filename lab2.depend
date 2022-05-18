@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1652857237 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
+1652869475 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
 	<iostream>
 	<Vector.h>
 	<SpaceObject.h>
@@ -15,19 +15,31 @@
 
 1652820647 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\rgb.h
 
-1652858469 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
+1652882580 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
 	<Vector.h>
 	<RGB.h>
 	<vector>
 	<string>
 
-1652868259 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
+1652882593 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
 	"SpaceObject.h"
 
-1652855065 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
+1652882627 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
 	"Space.h"
 
-1652822966 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
+1652887511 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
 	<vector>
 	<SpaceObject.h>
+	<State.h>
+
+1652872126 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceaplication.cpp
+	"SpaceAplication.h"
+
+1652873526 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceaplication.h
+
+1652888230 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\state.h
+	<Space.h>
+
+1652888183 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\state.cpp
+	"State.h"
 

@@ -66,7 +66,6 @@ class BlackHole : public SpaceObject
 public:
     BlackHole(float, RGB);
 private:
-    float get_m3(SpaceObject*) override;
     Vector get_speed_by_impuls(SpaceObject*) override;
     void set_radius_by_marge(SpaceObject*) override;
 };
