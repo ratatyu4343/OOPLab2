@@ -10,19 +10,24 @@ class State;
 class Space
 {
 public:
-    Space(float, float);
-    void add_object(SpaceObject*);
+    static Space* get_space(float, float);
     void delete_object(SpaceObject*);
     void set_gconst(float);
     float get_gconst();
+    void set_time(float);
+    float get_time();
     void modeling();
 
     State* state;
-    bool stoped;
     void clickModeling();
     void clickPause();
+    void addObject(SpaceObject*);
     void changeState(State*);
+    void add_obj(SpaceObject*);
+    void draw();
 private:
+    Space(float, float);
+    static  Space* space;
     float G_CONST;
     float time;
     float force(SpaceObject*, SpaceObject*);

@@ -1,16 +1,26 @@
 #include "Space.h"
 
+Space* Space::space;
+
+Space* Space::get_space(float G, float t)
+{
+    if(Space::space == nullptr)
+    {
+        Space::space = new Space(G, t);
+    }
+    else
+    {
+        Space::space->set_gconst(G);
+        Space::space->set_time(t);
+    }
+    return Space::space;
+}
+
 Space::Space(float G, float time)
 {
     G_CONST = G;
     this->time = time;
-    stoped = true;
     state = new PauseState(this);
-}
-
-void Space::add_object(SpaceObject* obj)
-{
-    objects.push_back(obj);
 }
 
 float Space::force(SpaceObject* obj1, SpaceObject* obj2)
@@ -27,6 +37,16 @@ void Space::set_gconst(float g)
 float Space::get_gconst()
 {
     return G_CONST;
+}
+
+void Space::set_time(float t)
+{
+    time = t;
+}
+
+float Space::get_time()
+{
+    return time;
 }
 
 bool Space::colision(SpaceObject* obj1, SpaceObject* obj2)
@@ -56,6 +76,7 @@ void Space::modeling()
                     if(obj1->get_mass() >= obj2->get_mass())
                     {
                         obj1->marge(obj2);
+                        delete obj2;
                         objects.erase(objects.begin()+j);
                         (*count_of_planets)--;
                         if(i > j)
@@ -75,12 +96,15 @@ void Space::modeling()
                     obj1->set_acceleration(obj1->get_acceleration() += a);
                 }
         }
+    }
+    for(auto obj : objects)
+    {
         Vector coord;
-        coord.set_x(obj1->get_speed().x()*time + obj1->get_acceleration().x()*time*time/2);
-        coord.set_y(obj1->get_speed().y()*time + obj1->get_acceleration().y()*time*time/2);
-        obj1->set_position(obj1->get_position() += coord);
-        Vector s(obj1->get_acceleration().x()*time, obj1->get_acceleration().y()*time);
-        obj1->set_speed(obj1->get_speed() += s);
+        coord.set_x(obj->get_speed().x()*time + obj->get_acceleration().x()*time*time/2);
+        coord.set_y(obj->get_speed().y()*time + obj->get_acceleration().y()*time*time/2);
+        obj->set_position(obj->get_position() += coord);
+        Vector s(obj->get_acceleration().x()*time, obj->get_acceleration().y()*time);
+        obj->set_speed(obj->get_speed() += s);
     }
 
 }
@@ -101,3 +125,12 @@ void Space::changeState(State* new_state)
     state = new_state;
 }
 
+void Space::addObject(SpaceObject* obj)
+{
+    state->clickAdd(obj);
+}
+
+void Space::add_obj(SpaceObject* obj)
+{
+    objects.push_back(obj);
+}

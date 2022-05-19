@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1652953677 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
+1652984682 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
 	<iostream>
 	<Vector.h>
 	<SpaceObject.h>
@@ -25,10 +25,10 @@
 1652950654 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
 	"SpaceObject.h"
 
-1652953354 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
+1652985008 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
 	"Space.h"
 
-1652889397 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
+1652984931 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
 	<vector>
 	<SpaceObject.h>
 	<State.h>
@@ -40,9 +40,9 @@
 
 1652873526 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceaplication.h
 
-1652888240 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\state.h
+1652983344 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\state.h
 	<Space.h>
 
-1652888183 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\state.cpp
+1652983351 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\state.cpp
 	"State.h"
 
