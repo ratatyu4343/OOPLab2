@@ -3,7 +3,8 @@
 #include <vector>
 #include <SpaceObject.h>
 #include <State.h>
-
+#include <cmath>
+#include <iostream>
 class State;
 
 class Space

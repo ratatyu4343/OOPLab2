@@ -58,7 +58,7 @@ class Planet : public SpaceObject
 public:
     Planet(float, float, RGB);
 private:
-    float get_m3(SpaceObject*) override;
+    float get_m3(SpaceObject*)override;
 };
 
 class BlackHole : public SpaceObject

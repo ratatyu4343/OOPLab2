@@ -23,12 +23,16 @@
 		</Compiler>
 		<Unit filename="include/RGB.h" />
 		<Unit filename="include/Space.h" />
+		<Unit filename="include/SpaceAplication.h" />
 		<Unit filename="include/SpaceObject.h" />
+		<Unit filename="include/State.h" />
 		<Unit filename="include/Vector.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/RGB.cpp" />
 		<Unit filename="src/Space.cpp" />
+		<Unit filename="src/SpaceAplication.cpp" />
 		<Unit filename="src/SpaceObject.cpp" />
+		<Unit filename="src/State.cpp" />
 		<Unit filename="src/Vector.cpp" />
 		<Extensions />
 	</Project>

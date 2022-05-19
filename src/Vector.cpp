@@ -59,5 +59,9 @@ Vector Vector::operator -= (Vector v)
 float Vector::length(Vector v1, Vector v2)
 {
     v1 -= v2;
-    return std::sqrt(v1.x()*v1.x() + v1.y()*v1.y());
+    float leng = std::sqrt(v1.x()*v1.x() + v1.y()*v1.y());
+    if(leng > 0)
+        return leng;
+    else
+        return 0.0000001;
 }

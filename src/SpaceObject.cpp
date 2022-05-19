@@ -2,7 +2,7 @@
 
 std::vector<SpaceObjectType*> SpaceObjectFactory::typeCollection;
 
-SpaceObjectType::SpaceObjectType(float r, float m, RGB rgb)
+SpaceObjectType::SpaceObjectType(float m, float r, RGB rgb)
 {
     mass = m;
     radius = r;
@@ -39,7 +39,7 @@ SpaceObjectType* SpaceObjectFactory::get_type(float mass, float radius, RGB rgb)
             return typeCollection[i];
         }
     }
-    auto new_type = new SpaceObjectType(radius, mass, rgb);
+    auto new_type = new SpaceObjectType(mass, radius, rgb);
     typeCollection.push_back(new_type);
     return new_type;
 }
@@ -147,7 +147,7 @@ float Planet::get_m3(SpaceObject* obj)
     return this->get_mass() + obj->get_mass()*0.85;
 }
 
-BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(2147483647, r, rgb)
+BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(1000000, r, rgb)
 {
 
 }
@@ -157,9 +157,9 @@ Vector BlackHole::get_speed_by_impuls(SpaceObject*)
     return this->get_speed();
 }
 
-void BlackHole::set_radius_by_marge(SpaceObject*)
+void BlackHole::set_radius_by_marge(SpaceObject* obj)
 {
-
+    this->set_radius(this->get_radius() + obj->get_radius()*0.001);
 }
 
 Star::Star(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
@@ -172,8 +172,8 @@ float Star::get_m3(SpaceObject* obj)
      return this->get_mass() + obj->get_mass()/2;
 }
 
-void Star::set_radius_by_marge(SpaceObject*)
+void Star::set_radius_by_marge(SpaceObject* obj)
 {
-
+    this->set_radius(this->get_radius() + obj->get_radius()*0.3);
 }
 
