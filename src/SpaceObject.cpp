@@ -2,10 +2,11 @@
 
 std::vector<SpaceObjectType*> SpaceObjectFactory::typeCollection;
 
-SpaceObjectType::SpaceObjectType(float m, float r, RGB rgb)
+SpaceObjectType::SpaceObjectType(float m, float r, RGB rgb, string n)
 {
     mass = m;
     radius = r;
+    name = n;
     color.set_R(rgb.get_R());
     color.set_G(rgb.get_G());
     color.set_B(rgb.get_B());
@@ -26,7 +27,12 @@ RGB SpaceObjectType::get_rgb()
     return color;
 }
 
-SpaceObjectType* SpaceObjectFactory::get_type(float mass, float radius, RGB rgb)
+string SpaceObjectType::get_name()
+{
+    return name;
+}
+
+SpaceObjectType* SpaceObjectFactory::get_type(float mass, float radius, RGB rgb, string name)
 {
     int count_of_types = typeCollection.size();
     for(int i = 0; i < count_of_types; i++)
@@ -34,19 +40,20 @@ SpaceObjectType* SpaceObjectFactory::get_type(float mass, float radius, RGB rgb)
         bool b1 = typeCollection[i]->get_mass() == mass;
         bool b2 = typeCollection[i]->get_radius() == radius;
         bool b3 = typeCollection[i]->get_rgb() == rgb;
-        if(b1&&b2&&b3)
+        bool b4 = typeCollection[i]->get_name() == name;
+        if(b1&&b2&&b3&&b4)
         {
             return typeCollection[i];
         }
     }
-    auto new_type = new SpaceObjectType(mass, radius, rgb);
+    auto new_type = new SpaceObjectType(mass, radius, rgb, name);
     typeCollection.push_back(new_type);
     return new_type;
 }
 
-SpaceObject::SpaceObject(float m, float r, RGB rgb)
+SpaceObject::SpaceObject(float m, float r, RGB rgb, string name)
 {
-    type = SpaceObjectFactory::get_type(m, r, rgb);
+    type = SpaceObjectFactory::get_type(m, r, rgb, name);
 }
 
 Vector SpaceObject::get_speed()
@@ -81,17 +88,17 @@ void SpaceObject::set_acceleration(Vector v)
 
 void SpaceObject::set_mass(float m)
 {
-    type = SpaceObjectFactory::get_type(m, get_radius(), get_rgb());
+    type = SpaceObjectFactory::get_type(m, get_radius(), get_rgb(), type->get_name());
 }
 
 void SpaceObject::set_radius(float r)
 {
-    type = SpaceObjectFactory::get_type(get_mass(), r, get_rgb());
+    type = SpaceObjectFactory::get_type(get_mass(), r, get_rgb(), type->get_name());
 }
 
 void SpaceObject::set_color(RGB rgb)
 {
-    type = SpaceObjectFactory::get_type(get_mass(), get_radius(), rgb);
+    type = SpaceObjectFactory::get_type(get_mass(), get_radius(), rgb, type->get_name());
 }
 
 float SpaceObject::get_mass()
@@ -137,7 +144,7 @@ void SpaceObject::marge(SpaceObject* obj)
     set_radius_by_marge(obj);
 }
 
-Planet::Planet(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
+Planet::Planet(float m, float r, RGB rgb) : SpaceObject(m, r, rgb, "Planet")
 {
 
 }
@@ -147,7 +154,7 @@ float Planet::get_m3(SpaceObject* obj)
     return this->get_mass() + obj->get_mass()*0.85;
 }
 
-BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(1000000, r, rgb)
+BlackHole::BlackHole(float r, RGB rgb) : SpaceObject(1000000, r, rgb, "BlackHole")
 {
 
 }
@@ -162,7 +169,8 @@ void BlackHole::set_radius_by_marge(SpaceObject* obj)
     this->set_radius(this->get_radius() + obj->get_radius()*0.001);
 }
 
-Star::Star(float m, float r, RGB rgb) : SpaceObject(m, r, rgb)
+
+Star::Star(float m, float r, RGB rgb) : SpaceObject(m, r, rgb, "Star")
 {
 
 }
@@ -176,4 +184,6 @@ void Star::set_radius_by_marge(SpaceObject* obj)
 {
     this->set_radius(this->get_radius() + obj->get_radius()*0.3);
 }
+
+
 

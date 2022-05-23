@@ -16,9 +16,14 @@ int main()
         ppp->set_position(Vector(rand()%1002, rand()%2202));
         s->addObject(ppp);
     }
-    while(true)
+    s->creatSnapShot();
+    s->set_gconst(122);
+    std::cout << s->get_gconst() << " |";
+    s->restore();
+    std::cout << s->get_gconst() << " |";
+    /*while(true)
     {
         s->clickModeling();
         s->addObject(new Planet(10, 1, RGB(0, 0 , 0)));
-    }
+    }*/
 }

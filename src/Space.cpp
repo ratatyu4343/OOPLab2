@@ -21,6 +21,7 @@ Space::Space(float G, float time)
     G_CONST = G;
     this->time = time;
     state = new PauseState(this);
+    snap = nullptr;
 }
 
 float Space::force(SpaceObject* obj1, SpaceObject* obj2)
@@ -57,6 +58,7 @@ bool Space::colision(SpaceObject* obj1, SpaceObject* obj2)
     else
         return false;
 }
+
 
 #define PI 3.14159265
 void Space::modeling()
@@ -133,4 +135,64 @@ void Space::addObject(SpaceObject* obj)
 void Space::add_obj(SpaceObject* obj)
 {
     objects.push_back(obj);
+}
+
+void Space::clearObjcts()
+{
+    for(auto o : objects)
+        delete o;
+    objects.resize(0);
+}
+
+void Space::creatSnapShot()
+{
+    if(snap)
+        delete snap;
+
+    snap = new SpaceSnapShot(this, G_CONST, time, objects);
+}
+
+void Space::restore()
+{
+    snap->restore();
+}
+
+SpaceSnapShot::SpaceSnapShot(Space* s, float G, float t, std::vector<SpaceObject*> vec)
+{
+    space = s;
+    G_CONST = G;
+    time = t;
+    for(int i = 0; i < vec.size(); i++)
+    {
+        ObjectSpanShot snap;
+        snap.position = vec[i]->get_position();
+        snap.speed = vec[i]->get_speed();
+        snap.a = vec[i]->get_acceleration();
+        snap.type = SpaceObjectFactory::get_type(vec[i]->get_mass(), vec[i]->get_radius(), vec[i]->get_rgb(), vec[i]->get_name());
+        objcs.push_back(snap);
+    }
+}
+
+void SpaceSnapShot::restore()
+{
+    space->set_gconst(G_CONST);
+    space->set_time(time);
+    space->clearObjcts();
+    for(int i = 0; i < objcs.size(); i++)
+    {
+        SpaceObject* obj;
+        if(objcs[i].type->get_name() == "Planet")
+            obj = new Planet(objcs[i].type->get_mass(), objcs[i].type->get_radius(), objcs[i].type->get_rgb());
+        else if(objcs[i].type->get_name() == "Star")
+            obj = new Star(objcs[i].type->get_mass(), objcs[i].type->get_radius(), objcs[i].type->get_rgb());
+        else
+            obj = new BlackHole(objcs[i].type->get_radius(), objcs[i].type->get_rgb());
+        obj->set_acceleration(objcs[i].a);
+        obj->set_speed(objcs[i].speed);
+        obj->set_position(objcs[i].position);
+        obj->set_mass(objcs[i].type->get_mass());
+        obj->set_color(objcs[i].type->get_rgb());
+        obj->set_radius(objcs[i].type->get_radius());
+        space->addObject(obj);
+    }
 }
