@@ -10,6 +10,8 @@ public:
     virtual void clickModeling(){};
     virtual void clickPause(){};
     virtual void clickAdd(SpaceObject*){};
+    virtual void clickSnapShot(){};
+    virtual void clickRestore(){};
     Space* space;
 };
 
@@ -20,6 +22,8 @@ public:
     void clickPause() override;
     void clickModeling() override;
     void clickAdd(SpaceObject*) override;
+    void clickSnapShot(){};
+    void clickRestore(){};
 };
 
 class PauseState : public State
@@ -29,6 +33,8 @@ public:
     void clickModeling() override;
     void clickPause() override;
     void clickAdd(SpaceObject*) override;
+    void clickSnapShot() override;
+    void clickRestore() override;
 };
 
 #endif // STATE_H

@@ -30,6 +30,22 @@ float Space::force(SpaceObject* obj1, SpaceObject* obj2)
     return (G_CONST*obj1->get_mass()*obj2->get_mass())/(leng*leng);
 }
 
+void Space::draw(SDL_Window* window, SDL_Renderer* render)
+{
+    SDL_SetRenderDrawColor(render, 255, 0, 0, 255 );
+    SDL_RenderClear(render);
+    for(auto obj : objects)
+    {
+        SDL_Rect r;
+        r.h = r.w = obj->get_radius();
+        r.x = obj->get_position().x();
+        r.y = obj->get_position().y();
+        SDL_SetRenderDrawColor(render, 0, 0, 255, 255 );
+        SDL_RenderFillRect(render, &r );
+    }
+    SDL_RenderPresent(render);
+}
+
 void Space::set_gconst(float g)
 {
     G_CONST = g;
@@ -121,6 +137,16 @@ void Space::clickPause()
     state->clickPause();
 }
 
+void Space::clickSnapShot()
+{
+    state->clickSnapShot();
+}
+
+void Space::clickRestore()
+{
+    state->clickRestore();
+}
+
 void Space::changeState(State* new_state)
 {
     delete state;
@@ -144,7 +170,7 @@ void Space::clearObjcts()
     objects.resize(0);
 }
 
-void Space::creatSnapShot()
+void Space::_creatSnapShot()
 {
     if(snap)
         delete snap;
@@ -152,7 +178,7 @@ void Space::creatSnapShot()
     snap = new SpaceSnapShot(this, G_CONST, time, objects);
 }
 
-void Space::restore()
+void Space::_restore()
 {
     snap->restore();
 }

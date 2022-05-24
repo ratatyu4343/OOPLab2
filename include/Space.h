@@ -5,6 +5,7 @@
 #include <State.h>
 #include <cmath>
 #include <iostream>
+#include "SDL2/SDL.h"
 class State;
 class SpaceSnapShot;
 
@@ -18,18 +19,20 @@ public:
     void set_time(float);
     float get_time();
     void modeling();
-    void restore();
-    void creatSnapShot();
-    void clearObjcts();
+
 
     State* state;
     void clickModeling();
     void clickPause();
+    void clickSnapShot();
+    void clickRestore();
     void addObject(SpaceObject*);
     void changeState(State*);
     void add_obj(SpaceObject*);
-    void draw();
-
+    void _restore();
+    void _creatSnapShot();
+    void clearObjcts();
+    void draw(SDL_Window*, SDL_Renderer*);
 private:
     SpaceSnapShot* snap;
     Space(float, float);

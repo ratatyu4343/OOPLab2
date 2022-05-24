@@ -44,3 +44,13 @@ void  PauseState::clickAdd(SpaceObject* obj)
 {
     space->add_obj(obj);
 }
+
+void PauseState::clickSnapShot()
+{
+    space->_creatSnapShot();
+}
+
+void PauseState::clickRestore()
+{
+    space->_restore();
+}
