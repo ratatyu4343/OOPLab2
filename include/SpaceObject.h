@@ -47,7 +47,7 @@ public:
     float get_radius();
     RGB get_rgb();
     virtual string get_name(){};
-    void marge(SpaceObject*);
+    void marge(SpaceObject*, float time);
 private:
     SpaceObjectType* type;
     Vector position;

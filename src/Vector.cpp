@@ -63,5 +63,54 @@ float Vector::length(Vector v1, Vector v2)
     if(leng > 0)
         return leng;
     else
-        return 0.0000001;
+        return 0.00000001;
+}
+
+PairVectorAdapter::PairVectorAdapter(std::pair<float, float> P)
+{
+    p = P;
+}
+
+float PairVectorAdapter::x()
+{
+    return p.first;
+}
+
+float PairVectorAdapter::y()
+{
+    return p.second;
+}
+
+void PairVectorAdapter::set_x(float x)
+{
+    p.first = x;
+}
+
+void PairVectorAdapter::set_y(float y)
+{
+    p.second = y;
+}
+
+void PairVectorAdapter::add_x(float x)
+{
+    p.first += x;
+}
+
+void PairVectorAdapter::add_y(float y)
+{
+    p.second += y;
+}
+
+Vector PairVectorAdapter::operator += (Vector v)
+{
+    add_x(v.x());
+    add_y(v.y());
+    return *this;
+}
+
+Vector PairVectorAdapter::operator -= (Vector v)
+{
+    add_x(-v.x());
+    add_y(-v.y());
+    return *this;
 }

@@ -6,8 +6,12 @@
 #include <cmath>
 #include <iostream>
 #include "SDL2/SDL.h"
+#include "SpaceWindow.h"
+#include <Logs.h>
+
 class State;
 class SpaceSnapShot;
+class Subscriber;
 
 class Space
 {
@@ -19,7 +23,7 @@ public:
     void set_time(float);
     float get_time();
     void modeling();
-
+    std::vector<SpaceObject*> getObjs();
 
     State* state;
     void clickModeling();
@@ -32,8 +36,8 @@ public:
     void _restore();
     void _creatSnapShot();
     void clearObjcts();
-    void draw(SDL_Window*, SDL_Renderer*);
 private:
+    Subscriber* subscrb;
     SpaceSnapShot* snap;
     Space(float, float);
     static  Space* space;
@@ -64,6 +68,17 @@ struct ObjectSpanShot
     Vector speed;
     Vector a;
     SpaceObjectType* type;
+};
+
+
+class Subscriber
+{
+public:
+    void subscribe(Logs*);
+    void unsubscribe(Logs*);
+    void update(std::vector<SpaceObject*>);
+private:
+    std::vector<Logs*> v;
 };
 
 #endif // SPACE_H

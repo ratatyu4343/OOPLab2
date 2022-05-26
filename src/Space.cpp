@@ -22,28 +22,17 @@ Space::Space(float G, float time)
     this->time = time;
     state = new PauseState(this);
     snap = nullptr;
+    subscrb = new Subscriber;
+    Logs* POS = new PositionLogs("positons");
+    Logs* SPE = new SpeedLogs("speeds");
+    subscrb->subscribe(POS);
+    subscrb->subscribe(SPE);
 }
 
 float Space::force(SpaceObject* obj1, SpaceObject* obj2)
 {
     float leng = Vector::length(obj1->get_position(), obj2->get_position());
     return (G_CONST*obj1->get_mass()*obj2->get_mass())/(leng*leng);
-}
-
-void Space::draw(SDL_Window* window, SDL_Renderer* render)
-{
-    SDL_SetRenderDrawColor(render, 255, 0, 0, 255 );
-    SDL_RenderClear(render);
-    for(auto obj : objects)
-    {
-        SDL_Rect r;
-        r.h = r.w = obj->get_radius();
-        r.x = obj->get_position().x();
-        r.y = obj->get_position().y();
-        SDL_SetRenderDrawColor(render, 0, 0, 255, 255 );
-        SDL_RenderFillRect(render, &r );
-    }
-    SDL_RenderPresent(render);
 }
 
 void Space::set_gconst(float g)
@@ -79,52 +68,58 @@ bool Space::colision(SpaceObject* obj1, SpaceObject* obj2)
 #define PI 3.14159265
 void Space::modeling()
 {
-    std::cout << objects.size() << "|\n";
-    int size_of_p = (int)objects.size();
-    int *count_of_planets = &size_of_p;
-    for(int i = 0; i < *count_of_planets; i++)
+    for(int i = 0; i < objects.size(); i++)
     {
         SpaceObject* obj1 = objects[i];
-        for(int j = 0; j < *count_of_planets; j++)
+        Vector force_total(0, 0);
+        for(int j = 0; j < objects.size(); j++)
         {
+            if(i == j) continue;
             SpaceObject* obj2 = objects[j];
-            if(i != j)
-                if(colision(obj1, obj2))
+            if(colision(obj1, obj2))
+            {
+                if(obj1->get_mass() >= obj2->get_mass())
                 {
-                    if(obj1->get_mass() >= obj2->get_mass())
-                    {
-                        obj1->marge(obj2);
-                        delete obj2;
-                        objects.erase(objects.begin()+j);
-                        (*count_of_planets)--;
-                        if(i > j)
-                        {
-                            i--;
-                        }
-                        j = -1;
-                    }
+                    obj1->marge(obj2, time);
+                    delete obj2;
+                    objects.erase(objects.begin()+j);
+                    if(i > j)
+                        i--;
+                    j--;
                 }
-                else
-                {
-                    float fors = force(obj1, obj2);
-                    Vector p1 = obj1->get_position();
-                    Vector p2 = obj2->get_position();
-                    float alpha = std::atan2(p2.y()-p1.y(), p2.x()-p1.x());
-                    Vector a(fors*std::cos(alpha)/obj1->get_mass(), fors*std::sin(alpha)/obj1->get_mass());
-                    obj1->set_acceleration(obj1->get_acceleration() += a);
-                }
+            }
+            else
+            {
+                float fors = force(obj1, obj2);
+                Vector p1 = obj1->get_position();
+                Vector p2 = obj2->get_position();
+                float alpha = std::atan2(p2.y()-p1.y(), p2.x()-p1.x());
+                force_total += Vector(fors*std::cos(alpha), fors*std::sin(alpha));
+            }
         }
+        Vector a(force_total.x()/obj1->get_mass(), force_total.y()/obj1->get_mass());
+        obj1->set_acceleration(obj1->get_acceleration() += a);
+        obj1->set_acceleration(obj1->get_acceleration() -= Vector(obj1->get_acceleration().x()/8, obj1->get_acceleration().y()/8));
     }
     for(auto obj : objects)
     {
-        Vector coord;
-        coord.set_x(obj->get_speed().x()*time + obj->get_acceleration().x()*time*time/2);
-        coord.set_y(obj->get_speed().y()*time + obj->get_acceleration().y()*time*time/2);
-        obj->set_position(obj->get_position() += coord);
-        Vector s(obj->get_acceleration().x()*time, obj->get_acceleration().y()*time);
-        obj->set_speed(obj->get_speed() += s);
+        if(obj->get_name() != "BlackHole")
+        {
+            Vector coord;
+            coord.set_x(obj->get_speed().x()*time + obj->get_acceleration().x()*time*time/2);
+            coord.set_y(obj->get_speed().y()*time + obj->get_acceleration().y()*time*time/2);
+            obj->set_position(obj->get_position() += coord);
+            Vector s(obj->get_acceleration().x()*time, obj->get_acceleration().y()*time);
+            obj->set_speed(obj->get_speed() += s);
+        }
+        else
+        {
+            obj->set_position(obj->get_position());
+            obj->set_speed(Vector(0, 0));
+            obj->set_acceleration(Vector(0, 0));
+        }
     }
-
+    subscrb->update(objects);
 }
 
 void Space::clickModeling()
@@ -168,6 +163,11 @@ void Space::clearObjcts()
     for(auto o : objects)
         delete o;
     objects.resize(0);
+}
+
+std::vector<SpaceObject*> Space::getObjs()
+{
+    return objects;
 }
 
 void Space::_creatSnapShot()
@@ -222,3 +222,23 @@ void SpaceSnapShot::restore()
         space->addObject(obj);
     }
 }
+
+void Subscriber::subscribe(Logs* L)
+{
+    v.push_back(L);
+}
+
+void Subscriber::unsubscribe(Logs* L)
+{
+    int i = 0;
+    while(i < v.size() && v[i]!=L);
+    if(i < v.size())
+        v.erase(v.begin() + i);
+}
+
+void Subscriber::update(std::vector<SpaceObject*> v2)
+{
+    for(int i = 0; i < v.size(); i++)
+        v[i]->update(v2);
+}
+

@@ -1,41 +1,46 @@
 # depslib dependency file v1.0
-1653379367 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
+1653589275 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\main.cpp
 	<iostream>
 	<Vector.h>
 	<SpaceObject.h>
 	<Space.h>
 	"SDL2/SDL.h"
+	"SpaceWindow.h"
+	"SDL2/SDL_main.h"
 
 1652905794 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\vector.cpp
 	"Vector.h"
 
-1652822301 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
+1653591118 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
 	<cmath>
+	<utility>
 
 1652619912 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\rgb.cpp
 	"RGB.h"
 
 1652820647 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\rgb.h
 
-1653328517 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
+1653391161 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spaceobject.h
 	<Vector.h>
 	<RGB.h>
 	<vector>
 	<string>
 
-1653327818 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
+1653581800 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
 	"SpaceObject.h"
 
-1653378910 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
+1653589954 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
 	"Space.h"
 
-1653375445 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
+1653585139 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
 	<vector>
 	<SpaceObject.h>
 	<State.h>
 	<cmath>
 	<iostream>
 	"SDL2/SDL.h"
+	"SpaceWindow.h"
+	<Logs.h>
 
 1652872126 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceaplication.cpp
 	"SpaceAplication.h"
@@ -45,6 +50,23 @@
 1653328807 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\state.h
 	<Space.h>
 
-1653328972 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\state.cpp
+1653578849 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\state.cpp
 	"State.h"
+
+1653580010 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\spacewindow.h
+	"Space.h"
+	"SpaceObject.h"
+	"RGB.h"
+	"SDL2/SDL.h"
+
+1653587979 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spacewindow.cpp
+	"SpaceWindow.h"
+
+1653589588 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\logs.h
+	<vector>
+	<fstream>
+	<SpaceObject.h>
+
+1653589636 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\logs.cpp
+	"Logs.h"
 
