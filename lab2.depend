@@ -8,7 +8,7 @@
 	"SpaceWindow.h"
 	"SDL2/SDL_main.h"
 
-1652905794 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\vector.cpp
+1653598420 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\vector.cpp
 	"Vector.h"
 
 1653591118 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\vector.h
@@ -29,7 +29,7 @@
 1653581800 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spaceobject.cpp
 	"SpaceObject.h"
 
-1653589954 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
+1653598682 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\space.cpp
 	"Space.h"
 
 1653585139 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\space.h
@@ -62,11 +62,11 @@
 1653587979 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\spacewindow.cpp
 	"SpaceWindow.h"
 
-1653589588 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\logs.h
+1653598835 c:\users\professional\desktop\ooop\laboratorna2\lab2\include\logs.h
 	<vector>
 	<fstream>
 	<SpaceObject.h>
 
-1653589636 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\logs.cpp
+1653598578 source:c:\users\professional\desktop\ooop\laboratorna2\lab2\src\logs.cpp
 	"Logs.h"
 

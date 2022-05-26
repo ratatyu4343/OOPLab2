@@ -13,9 +13,18 @@ public:
     };
     virtual void update(std::vector<SpaceObject*>){};
 protected:
-    int timer = 0;
     std::string name;
     std::ofstream f;
+};
+
+class LogsProx : public Logs
+{
+public:
+    LogsProx(Logs* L):Logs(""){log = L;}
+    void update(std::vector<SpaceObject*>) override;
+private:
+    int timer = 0;
+    Logs* log;
 };
 
 class PositionLogs : public Logs

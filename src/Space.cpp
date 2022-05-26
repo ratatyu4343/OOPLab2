@@ -24,9 +24,11 @@ Space::Space(float G, float time)
     snap = nullptr;
     subscrb = new Subscriber;
     Logs* POS = new PositionLogs("positons");
+    Logs* POS_PROX = new LogsProx(POS);
     Logs* SPE = new SpeedLogs("speeds");
-    subscrb->subscribe(POS);
-    subscrb->subscribe(SPE);
+    Logs* SPE_PROX = new LogsProx(SPE);
+    subscrb->subscribe(POS_PROX);
+    subscrb->subscribe(SPE_PROX);
 }
 
 float Space::force(SpaceObject* obj1, SpaceObject* obj2)
